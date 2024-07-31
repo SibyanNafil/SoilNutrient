@@ -200,54 +200,54 @@ void setup1() {
     pTempCharacteristic = pService->createCharacteristic(
         TEMP_CHARACTERISTIC_UUID,
         BLECharacteristic::PROPERTY_READ |
-        BLECharacteristic::PROPERTY_WRITE |
-        BLECharacteristic::PROPERTY_NOTIFY |
-        BLECharacteristic::PROPERTY_INDICATE
+        // BLECharacteristic::PROPERTY_WRITE |
+        BLECharacteristic::PROPERTY_NOTIFY 
+        // BLECharacteristic::PROPERTY_INDICATE
     );
     pTempCharacteristic->addDescriptor(new BLE2902());
 
     pMoistureCharacteristic = pService->createCharacteristic(
         MOISTURE_CHARACTERISTIC_UUID,
         BLECharacteristic::PROPERTY_READ |
-        BLECharacteristic::PROPERTY_WRITE |
-        BLECharacteristic::PROPERTY_NOTIFY |
-        BLECharacteristic::PROPERTY_INDICATE
+        // BLECharacteristic::PROPERTY_WRITE |
+        BLECharacteristic::PROPERTY_NOTIFY 
+        // BLECharacteristic::PROPERTY_INDICATE
     );
     pMoistureCharacteristic->addDescriptor(new BLE2902());
 
     pPhCharacteristic = pService->createCharacteristic(
         PH_CHARACTERISTIC_UUID,
         BLECharacteristic::PROPERTY_READ |
-        BLECharacteristic::PROPERTY_WRITE |
-        BLECharacteristic::PROPERTY_NOTIFY |
-        BLECharacteristic::PROPERTY_INDICATE
+        // BLECharacteristic::PROPERTY_WRITE |
+        BLECharacteristic::PROPERTY_NOTIFY 
+        // BLECharacteristic::PROPERTY_INDICATE
     );
     pPhCharacteristic->addDescriptor(new BLE2902());
 
     pNitrogenCharacteristic = pService->createCharacteristic(
         NITROGEN_CHARACTERISTIC_UUID,
         BLECharacteristic::PROPERTY_READ |
-        BLECharacteristic::PROPERTY_WRITE |
-        BLECharacteristic::PROPERTY_NOTIFY |
-        BLECharacteristic::PROPERTY_INDICATE
+        // BLECharacteristic::PROPERTY_WRITE |
+        BLECharacteristic::PROPERTY_NOTIFY 
+        // BLECharacteristic::PROPERTY_INDICATE
     );
     pNitrogenCharacteristic->addDescriptor(new BLE2902());
 
     pPhosphorCharacteristic = pService->createCharacteristic(
         PHOSPHOR_CHARACTERISTIC_UUID,
         BLECharacteristic::PROPERTY_READ |
-        BLECharacteristic::PROPERTY_WRITE |
-        BLECharacteristic::PROPERTY_NOTIFY |
-        BLECharacteristic::PROPERTY_INDICATE
+        // BLECharacteristic::PROPERTY_WRITE |
+        BLECharacteristic::PROPERTY_NOTIFY 
+        // BLECharacteristic::PROPERTY_INDICATE
     );
     pPhosphorCharacteristic->addDescriptor(new BLE2902());
 
     pPotassiumCharacteristic = pService->createCharacteristic(
         POTASSIUM_CHARACTERISTIC_UUID,
         BLECharacteristic::PROPERTY_READ |
-        BLECharacteristic::PROPERTY_WRITE |
-        BLECharacteristic::PROPERTY_NOTIFY |
-        BLECharacteristic::PROPERTY_INDICATE
+        // BLECharacteristic::PROPERTY_WRITE |
+        BLECharacteristic::PROPERTY_NOTIFY 
+        // BLECharacteristic::PROPERTY_INDICATE
     );
     pPotassiumCharacteristic->addDescriptor(new BLE2902());
 
