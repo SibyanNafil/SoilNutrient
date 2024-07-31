@@ -195,7 +195,7 @@ void setup1() {
     pServer = BLEDevice::createServer();
     pServer->setCallbacks(new MyServerCallbacks());
 
-    BLEService *pService = pServer->createService(SERVICE_UUID);
+    BLEService *pService = pServer->createService( BLEUUID (SERVICE_UUID), 18);
 
     pTempCharacteristic = pService->createCharacteristic(
         TEMP_CHARACTERISTIC_UUID,
