@@ -17,22 +17,22 @@
 */ 
 
 // pin definitions
-#define ONE_WIRE_BUS 9
-#define SOIL_MOISTURE_PIN 7
+#define ONE_WIRE_BUS 17
+#define SOIL_MOISTURE_PIN 16
 #define EN_RS485 8
-#define PH_RXPIN 15
-#define PH_TXPIN 16
+#define PH_RXPIN 9
+#define PH_TXPIN 18
 #define NPK_RXPIN 39
 #define NPK_TXPIN 40
 #define EN_NPK 42
-// #define TFT_CS   10      10 or 34 (FSPI CS0) 
-// #define TFT_MOSI 11      11 or 35 (FSPI D)
-// #define TFT_SCLK 12      12 or 36 (FSPI CLK)
+// #define TFT_CS   4      10 or 34 (FSPI CS0) 
+// #define TFT_MOSI 7      11 or 35 (FSPI D)
+// #define TFT_SCLK 15      12 or 36 (FSPI CLK)
 // // #define TFT_MISO 37     13 or 37 (FSPI Q)
 
 // // Use pins in range 0-31
-// #define TFT_DC    5
-// #define TFT_RST   6
+// #define TFT_DC    6
+// #define TFT_RST   5
 
 
 /*Change to your screen resolution*/
@@ -329,15 +329,13 @@ void loop1() {
     sensors.requestTemperatures();
     float tempC = sensors.getTempCByIndex(0);
     int soilMoistureValue = analogRead(SOIL_MOISTURE_PIN);
+    int persentase = map(soilMoistureValue, 3010, 0, 0, 100);
     ph = baca_sensor_pH(0) / 10.0;
     nitrogen = baca_Nitrogen(0x1E);
     phosphorous = baca_Phosphrus(0x1f);
     potassium = baca_potassium(0x20);
 
-    Serial.print("Moisture: ");
-    Serial.print(soilMoistureValue);
-    Serial.print(" | Temperature: ");
-    Serial.println(tempC);
+    Serial.println("Moisture:" + String(persentase) + "| analog : " + String(soilMoistureValue));
     Serial.println("Nitrogen: " + String(nitrogen) + " mg/kg");
     Serial.println("Phosphorous: " + String(phosphorous) + " mg/kg");
     Serial.println("Potassium: " + String(potassium) + " mg/kg");
@@ -345,7 +343,7 @@ void loop1() {
     
     // update Sensor value to LCD
     lv_label_set_text(ui_TempValueLabel, String(tempC).c_str());
-    lv_label_set_text(ui_HumValueLabel, String(soilMoistureValue).c_str());
+    lv_label_set_text(ui_HumValueLabel, String(persentase).c_str());
     lv_label_set_text(ui_PhValueLabel, String(ph).c_str());
     lv_label_set_text(ui_NValueLabel, String(nitrogen).c_str());
     lv_label_set_text(ui_PValueLabel, String(phosphorous).c_str());
@@ -356,7 +354,7 @@ void loop1() {
         pTempCharacteristic->setValue(String(tempC).c_str());
         pTempCharacteristic->notify();
 
-        pMoistureCharacteristic->setValue(String(soilMoistureValue).c_str());
+        pMoistureCharacteristic->setValue(String(persentase).c_str());
         pMoistureCharacteristic->notify();
 
         pPhCharacteristic->setValue(String(ph).c_str());
