@@ -190,6 +190,7 @@ void setup1() {
     node2.postTransmission(postTransmission_NPK);
     node.begin(SLAVE_ADDR, Serial1);
     node2.begin(SLAVE_ADDR, Serial2);
+     
     // Initialize BLE
     BLEDevice::init("PKM_KC_SOIL_NUTRIENTS");
     pServer = BLEDevice::createServer();
@@ -323,19 +324,41 @@ int baca_potassium(uint16_t alamatK)
   return nilai_Potassium;
 }
 
+
+int Regresi_Hum(int x)
+{
+  float z =-52.512;
+  float a = 2726.2;
+  float b = x;
+  int y = z * b + a;
+
+  if(y<0)
+  {
+    y = 0;
+  }else{}
+
+  if(y>100)
+  {
+    y = 100;
+  }else{}
+
+  return y;
+}
+
 void loop1() {
 
     
     sensors.requestTemperatures();
     float tempC = sensors.getTempCByIndex(0);
     int soilMoistureValue = analogRead(SOIL_MOISTURE_PIN);
-    int persentase = map(soilMoistureValue, 3010, 0, 0, 100);
+    int persentase = Regresi_Hum(soilMoistureValue);
     ph = baca_sensor_pH(0) / 10.0;
     nitrogen = baca_Nitrogen(0x1E);
     phosphorous = baca_Phosphrus(0x1f);
     potassium = baca_potassium(0x20);
 
     Serial.println("Moisture:" + String(persentase) + "| analog : " + String(soilMoistureValue));
+    Serial.println("suhu: " + String(tempC));
     Serial.println("Nitrogen: " + String(nitrogen) + " mg/kg");
     Serial.println("Phosphorous: " + String(phosphorous) + " mg/kg");
     Serial.println("Potassium: " + String(potassium) + " mg/kg");
@@ -412,7 +435,8 @@ void setup ()
 
     static lv_disp_t* disp;
     disp = lv_display_create( screenWidth, screenHeight );
-    lv_display_set_buffers( disp, buf, NULL, SCREENBUFFER_SIZE_PIXELS * sizeof(lv_color_t), LV_DISPLAY_RENDER_MODE_PARTIAL );
+    lv_display_set_buffers( disp, buf, NULL, SCREENBUFFER_SIZE_PIXELS * sizeof(lv_color_t 
+    ), LV_DISPLAY_RENDER_MODE_PARTIAL );
     lv_display_set_flush_cb( disp, my_disp_flush );
 
     static lv_indev_t* indev;
